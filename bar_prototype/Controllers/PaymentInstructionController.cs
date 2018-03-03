@@ -12,12 +12,14 @@ namespace bar_prototype.Controllers
 {
     public class PaymentInstructionController : Controller
     {
-        public PaymentInstructionRepository repository;
-        public IdGenerator idGenerator;
+        PaymentInstructionRepository repository;
+        ActionItemRepository actionItemRepository;
+        IdGenerator idGenerator;
         public PaymentInstructionController()
         {
             repository = new PaymentInstructionRepository();
             idGenerator = new IdGenerator();
+            actionItemRepository = new ActionItemRepository();
         }
 
         public IActionResult Index()
@@ -69,6 +71,12 @@ namespace bar_prototype.Controllers
         {
             var item = repository.Get(id);
             item.Status = StatusType.Submitted;
+
+
+            var actionItem = new Draft();
+            actionItem.PaymentGroup.PaymentInstructions.Add(item);
+            actionItem.Status = StatusType.Pending;
+            actionItemRepository.Add(actionItem);
 
             return RedirectToAction("Index");
         }

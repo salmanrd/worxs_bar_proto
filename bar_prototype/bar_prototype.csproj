@@ -21,5 +21,6 @@
     <Folder Include="Model\" />
     <Folder Include="Repository\" />
     <Folder Include="Views\PaymentInstruction\" />
+    <Folder Include="Views\ActionItem\" />
   </ItemGroup>
 </Project>

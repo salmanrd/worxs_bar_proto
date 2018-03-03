@@ -1,0 +1,41 @@
+﻿@{
+    ViewData["Title"] = "Payment Log";
+}
+
+@model List<bar_prototype.Model.ActionItem>
+
+<div>
+<table>
+        <thead>
+        <tr>
+            <th>Payment Instruction Id</th>
+            <th>Payment Method</th>
+            <th>Amount</th>
+            <th>Action Type</th>
+            <th>Status</th>
+         </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @foreach(var payment in item.PaymentGroup.PaymentInstructions)
+                    {
+                       <a href='@Url.Action("Details", new { id = item.Id })'>@payment.Id</a> <br />
+                    }
+
+                </td>
+                <td>
+                    @foreach(var payment in item.PaymentGroup.PaymentInstructions)
+                    {
+                        @payment.PaymentMethod <br />
+                    }
+                </td>
+                <td>@item.PaymentGroup.CalculateTotalPayment()</td>
+                <td>@item.ActionType</td>
+                <td>@item.Status</td>
+            </tr>
+        }
+        </tbody>
+</table>
+</div>
