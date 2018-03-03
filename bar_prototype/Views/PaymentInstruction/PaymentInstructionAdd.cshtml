@@ -1,0 +1,20 @@
+﻿
+
+@model bar_prototype.Model.PaymentInstructionViewModel
+
+@{
+    ViewData["Title"] = "New Payment Instruction";
+}
+
+@using (Html.BeginForm())
+{
+    <p>
+        @Html.DropDownListFor(x => Model.SelectedPaymentMethod, new SelectList(Model.PaymentMethods, "Value", "Text"))
+        <label>Amount</label>
+        @Html.TextBoxFor(m => m.Amount)
+        <input type="submit" value="Add" />
+       
+    </p>
+}
+
+<a href='@Url.Action("Submit", new { id = Model.Id })' >Submit</a>
