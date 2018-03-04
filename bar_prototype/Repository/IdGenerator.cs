@@ -9,5 +9,15 @@ namespace bar_prototype.Repository
         {
             return random.Next(9999);
         }
+
+        public int GetIdMax10()
+        {
+            return random.Next(10);
+        }
+
+        public int GetIdMax100()
+        {
+            return random.Next(100);
+        }
     }
 }

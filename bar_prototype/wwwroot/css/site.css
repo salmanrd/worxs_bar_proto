@@ -36,11 +36,33 @@ textarea {
     }
 }
 
+table, td, th {
+    border: 1px solid #ddd;
+    text-align: left
+}
 
-.actionItemTitle{
+table {
+    border-collapse: collapse;
+    width: 100%
+}
+
+th, td {
+    padding: 10px;
+}
+
+.actionItemTitle, .tabHeader {
     width: 800px;
     background-color: green;
     color: white;
     font-weight: bold;
-    font-size:large;
+    font-size: large
 }
+
+.tabHeader {
+    width: 800px;
+    background-color: gray;
+    color: white;
+    font-weight: bold;
+    font-size: large;
+}
+

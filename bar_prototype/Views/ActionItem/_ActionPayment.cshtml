@@ -1,0 +1,28 @@
+﻿@model bar_prototype.Model.ActionItem
+<p class="tabHeader">
+    Action Payment
+</p>
+
+<div>
+<table>
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Payment Method</th>
+            <th>Amount</th>
+
+         </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model.PaymentGroup.PaymentInstructions) {
+            <tr>
+                
+                <td>@item.Id</td>
+                <td>@item.PaymentMethod</td>
+                <td>@item.Amount</td>
+               
+            </tr>
+        }
+        </tbody>
+</table>
+</div>

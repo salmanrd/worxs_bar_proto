@@ -1,0 +1,42 @@
+﻿
+@model bar_prototype.Model.ActionItem
+
+<p class="tabHeader">
+    Allocate Payment
+</p>
+
+@using (Html.BeginForm("AddFee", "ActionItem"))
+{
+    <p>
+        @Html.HiddenFor(x => x.Id, "actionItemId")
+        <label>Fee Amount</label>
+        <input type="text" name="feeAmount" />
+        <input type="submit" value="Add Fee" />
+       
+    </p>
+}
+
+<div>
+<table>
+        <thead>
+        <tr>
+            <th>Case number</th>
+            <th>Fee code</th>
+            <th>Fee version</th>
+            <th>Fee description</th>
+            <th>Fee calculated amount</th>
+         </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model.Fees) {
+            <tr>
+                <td>@item.CaseReference</td>
+                <td>@item.Code</td>
+                <td>@item.Version</td>
+                <td>@item.Description</td>
+                <td>@item.CalculatedAmount</td>
+            </tr>
+        }
+        </tbody>
+</table>
+</div>

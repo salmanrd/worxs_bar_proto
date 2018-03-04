@@ -6,4 +6,14 @@
 
 <p class="actionItemTitle" >
     @Model.ActionType
+    <br/> 
+    Unallocated Payment: @Model.CalculateUnallocatedPayment()
 </p>
+
+@{
+    ViewData["ActionItemId"] = @Model.Id;
+}
+
+
+<p>@Html.Partial("_AllocatePayment", Model)</p>
+<p>@Html.Partial("_ActionPayment", Model)</p>
