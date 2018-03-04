@@ -1,8 +1,11 @@
 ﻿@model bar_prototype.Model.ActionItem
+
 <p class="tabHeader">
     Action Payment
 </p>
-
+<p>
+    <a href='@Url.Action("Process", new { id = Model.Id })' >Process</a>
+</p>
 <div>
 <table>
         <thead>

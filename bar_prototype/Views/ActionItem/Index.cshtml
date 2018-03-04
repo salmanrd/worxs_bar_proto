@@ -4,20 +4,27 @@
 
 @model List<bar_prototype.Model.ActionItem>
 
+<p>
+    @Html.ActionLink("Add New Draft", "Create")
+</p>
+
 <div>
 <table>
         <thead>
         <tr>
+            <th>Id</th>
             <th>Payment Instruction Id</th>
             <th>Payment Method</th>
             <th>Amount</th>
             <th>Action Type</th>
             <th>Status</th>
+            <th></th>
          </tr>
         </thead>
         <tbody>
         @foreach (var item in Model) {
             <tr>
+                <td>@item.Id</td>
                 <td>
                     @foreach(var payment in item.PaymentGroup.PaymentInstructions)
                     {
@@ -34,6 +41,7 @@
                 <td>@item.PaymentGroup.CalculateTotalPayment()</td>
                 <td>@item.ActionType</td>
                 <td>@item.Status</td>
+                <td><a href='@Url.Action("TransferToBar", new { id = item.Id })' >TransferToBar</a></td>
             </tr>
         }
         </tbody>

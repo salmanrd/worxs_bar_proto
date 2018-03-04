@@ -1,0 +1,18 @@
+﻿
+@model bar_prototype.Model.ActionItem
+
+<p class="tabHeader">
+    Add Payment
+</p>
+
+@using (Html.BeginForm("AddPayment", "ActionItem"))
+{
+    <p>
+        @Html.HiddenFor(x => x.Id, "actionItemId")
+        <label>Payment Instruction Id</label>
+        <input type="text" name="paymentInstructionId" />
+        <input type="submit" value="Add Payment" />
+       
+    </p>
+}
+

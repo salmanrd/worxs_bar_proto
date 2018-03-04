@@ -17,6 +17,7 @@
             <th>Payment Method</th>
             <th>Amount</th>
             <th>Status</th>
+            <th></th>
          </tr>
         </thead>
         <tbody>
@@ -26,6 +27,14 @@
                 <td>@item.PaymentMethod</td>
                 <td>@item.Amount</td>
                 <td>@item.Status</td>
+                @if(item.Status != bar_prototype.Model.StatusType.Submitted)
+                {
+                    <td><a href='@Url.Action("Submit", new { id = item.Id })' >Submit</a></td>
+                }
+                else
+                {
+                    <td></td>
+                }
             </tr>
         }
         </tbody>

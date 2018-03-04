@@ -73,13 +73,7 @@ namespace bar_prototype.Controllers
             item.Status = StatusType.Submitted;
 
 
-            var actionItem = new Draft
-            {
-                Id = idGenerator.GetId(),
-                Status = StatusType.Pending
-            };
-            actionItem.PaymentGroup.PaymentInstructions.Add(item);
-            actionItemRepository.Add(actionItem);
+           
 
             return RedirectToAction("Index");
         }

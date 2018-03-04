@@ -22,6 +22,11 @@ namespace bar_prototype.Repository
             items.Add(item);
         }
 
+        public void Remove(ActionItem item)
+        {
+            items.Remove(item);
+        }
+
         public ActionItem Get(int id)
         {
             return items.Find(x => x.Id == id);

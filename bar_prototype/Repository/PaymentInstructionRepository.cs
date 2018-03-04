@@ -26,5 +26,10 @@ namespace bar_prototype.Repository
         {
             return items.Find(x => x.Id == id);
         }
+
+        public PaymentInstruction Get(int id , StatusType status)
+        {
+            return items.Find(x => x.Id == id && x.Status == status);
+        }
     }
 }
