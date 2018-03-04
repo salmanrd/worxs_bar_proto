@@ -118,7 +118,44 @@ namespace bar_prototype.Controllers
             var item = actionItemRepository.Get(id);
             item.Status = StatusType.TransferredToBar;
 
+            foreach (var payment in item.PaymentGroup.PaymentInstructions)
+            {
+                payment.TransferredtoBar = true;
+            }
 
+
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult CreateSuspenseDeficiency(int id, int paymentId)
+        {
+            var item = actionItemRepository.Get(id);
+
+            var paymentInstruction = paymentInstructionRepository.Get(paymentId);
+            paymentInstruction.SuspenseDeficiency = true;
+
+            var suspenseDeficiency = new SuspenseDeficiency
+            {
+                Id = idGenerator.GetId(),
+                SuspenseDeficientPaymentId = paymentId,
+                Status = StatusType.PendingApproval
+            };
+            suspenseDeficiency.PaymentGroup.PaymentInstructions.Add(paymentInstruction);
+
+            actionItemRepository.Add(suspenseDeficiency);
+
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult CreateReplacementPayment(int id, int paymentId)
+        {
+            var item = actionItemRepository.Get(id);
+            item.Status = StatusType.TransferredToBar;
+
+            foreach (var payment in item.PaymentGroup.PaymentInstructions)
+            {
+                payment.TransferredtoBar = true;
+            }
 
 
             return RedirectToAction("Index");

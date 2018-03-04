@@ -28,7 +28,16 @@
                 <td>
                     @foreach(var payment in item.PaymentGroup.PaymentInstructions)
                     {
-                       <a href='@Url.Action("Details", new { id = item.Id })'>@payment.Id</a> <br />
+                       <a href='@Url.Action("Details", new { id = item.Id })'>@payment.Id</a> 
+                        if(payment.TransferredtoBar && !payment.SuspenseDeficiency)
+                        {
+                             <a href='@Url.Action("CreateSuspenseDeficiency", new { id = item.Id, paymentId = payment.Id })'>( CreateSuspenseDeficiency )</a> 
+                        }
+                       <!-- if(payment.SuspenseDeficiency)
+                        {
+                             <a href='@Url.Action("CreateReplacementPayment", new { id = item.Id, paymentId = payment.Id })'>( CreateReplacementPayment )</a> 
+                        }-->
+                        <br />
                     }
 
                 </td>

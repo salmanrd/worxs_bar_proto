@@ -21,6 +21,7 @@ namespace bar_prototype.Model
             PaymentGroup = new PaymentGroup();
             Fees = new List<Fee>();
             Remissions = new List<Remission>();
+            AssociatedActions = new List<ActionItem>();
         }
 
         public abstract string ActionType { get; }
@@ -31,6 +32,7 @@ namespace bar_prototype.Model
 
         public List<Remission> Remissions { get; set; }
         public List<Fee> Fees { get; set; }
+        public List<ActionItem> AssociatedActions { get; set; }
 
         public double CalculateUnallocatedPayment()
         {
