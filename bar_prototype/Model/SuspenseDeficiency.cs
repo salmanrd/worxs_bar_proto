@@ -4,7 +4,7 @@
     {
         public override string ActionType { get { return "SuspenseDeficiency"; } }
 
-        public int SuspenseDeficientPaymentId { get; set; }
+        public PaymentInstruction FailedPayment { get; set; }
     }
 
 

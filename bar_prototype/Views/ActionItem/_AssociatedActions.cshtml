@@ -1,0 +1,56 @@
+﻿
+
+@model bar_prototype.Model.ActionItem
+
+<p class="tabHeader">
+    Associated Actions
+</p>
+
+<div>
+<table>
+        <thead>
+        <tr>
+            <th>Case number</th>
+            <th>Fee code</th>
+            <th>Fee version</th>
+            <th>Fee description</th>
+            <th>Fee calculated amount</th>
+         </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model.Fees) {
+            <tr>
+                <td>@item.CaseReference</td>
+                <td>@item.Code</td>
+                <td>@item.Version</td>
+                <td>@item.Description</td>
+                <td>@item.CalculatedAmount</td>
+            </tr>
+        }
+        </tbody>
+</table>
+</div>
+
+<div>
+<table>
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Payment Method</th>
+            <th>Amount</th>
+
+         </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model.PaymentGroup.PaymentInstructions) {
+            <tr>
+                
+                <td>@item.Id</td>
+                <td>@item.PaymentMethod</td>
+                <td>@item.Amount</td>
+               
+            </tr>
+        }
+        </tbody>
+</table>
+</div>

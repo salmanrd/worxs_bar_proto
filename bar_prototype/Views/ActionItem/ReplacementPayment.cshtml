@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "Action Item";
+}
+
+@model bar_prototype.Model.ActionItem
+
+<p class="actionItemTitle" >
+    @Model.ActionType
+    <br/> 
+    Unallocated Payment: @Model.CalculateUnallocatedPayment()
+    <br/>
+
+</p>
+
+
+
+
+<p>@Html.Partial("_ActionPayment", Model)</p>
+<p>@Html.Partial("_AddPayment", Model)</p>
+<p>@Html.Partial("_AssociatedActions", Model)</p>

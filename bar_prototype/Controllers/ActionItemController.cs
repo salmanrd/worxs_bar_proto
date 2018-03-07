@@ -45,6 +45,12 @@ namespace bar_prototype.Controllers
         public IActionResult Details(int id)
         {
             var item = actionItemRepository.Get(id);
+
+            if (item.ActionType == "ReplacementPayment")
+            {
+                return View("ReplacementPayment", item);
+            }
+
             return View("ActionItem", item);
         }
 
@@ -137,28 +143,45 @@ namespace bar_prototype.Controllers
             var suspenseDeficiency = new SuspenseDeficiency
             {
                 Id = idGenerator.GetId(),
-                SuspenseDeficientPaymentId = paymentId,
+                FailedPayment = paymentInstruction,
                 Status = StatusType.PendingApproval
             };
             suspenseDeficiency.PaymentGroup.PaymentInstructions.Add(paymentInstruction);
+            suspenseDeficiency.AssociatedActions.Add(item);
 
             actionItemRepository.Add(suspenseDeficiency);
 
             return RedirectToAction("Index");
         }
 
-        public IActionResult CreateReplacementPayment(int id, int paymentId)
+        public IActionResult ViewSuspenseDeficiency(int id)
         {
             var item = actionItemRepository.Get(id);
-            item.Status = StatusType.TransferredToBar;
 
-            foreach (var payment in item.PaymentGroup.PaymentInstructions)
+            return RedirectToAction("SuspenseDeficiency" , item);
+        }
+
+        public IActionResult CreateReplacementPayment(int id)
+        {
+            var item = actionItemRepository.Get(id);
+
+            var replacementPayment = new ReplacementPayment
             {
-                payment.TransferredtoBar = true;
-            }
-
+                Id = idGenerator.GetId(),
+                Status = StatusType.PendingApproval
+            };
+     
+            replacementPayment.AssociatedActions.Add(item);
+            actionItemRepository.Add(replacementPayment);
 
             return RedirectToAction("Index");
         }
+
+       /* public IActionResult ViewReplacementPayment(int id)
+        {
+            var item = actionItemRepository.Get(id);
+
+            return RedirectToAction("ReplacementPayment", item);
+        }*/
     }
 }

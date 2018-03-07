@@ -34,7 +34,7 @@ namespace bar_prototype.Model
         public List<Fee> Fees { get; set; }
         public List<ActionItem> AssociatedActions { get; set; }
 
-        public double CalculateUnallocatedPayment()
+        public virtual double CalculateUnallocatedPayment()
         {
             var totalFees = Fees.Sum(x => x.CalculatedAmount);
             var totalRemission = Remissions.Sum(x => x.Amount);

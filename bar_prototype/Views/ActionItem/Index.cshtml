@@ -1,7 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Payment Log";
 }
-
+@using bar_prototype.Model;
 @model List<bar_prototype.Model.ActionItem>
 
 <p>
@@ -24,7 +24,8 @@
         <tbody>
         @foreach (var item in Model) {
             <tr>
-                <td>@item.Id</td>
+                
+                <td><a href='@Url.Action("Details", new { id = item.Id })'>@item.Id</a></td>
                 <td>
                     @foreach(var payment in item.PaymentGroup.PaymentInstructions)
                     {
@@ -50,7 +51,16 @@
                 <td>@item.PaymentGroup.CalculateTotalPayment()</td>
                 <td>@item.ActionType</td>
                 <td>@item.Status</td>
-                <td><a href='@Url.Action("TransferToBar", new { id = item.Id })' >TransferToBar</a></td>
+                <td>
+                    @if(item.ActionType == "SuspenseDeficiency" && item.Status == StatusType.TransferredToBar)
+                    {
+                         <a href='@Url.Action("CreateReplacementPayment", new { id = item.Id })'>CreateReplacementPayment</a> 
+                    }
+                    else
+                    {
+                        <a href='@Url.Action("TransferToBar", new { id = item.Id })' >TransferToBar</a>
+                    }
+                </td>
             </tr>
         }
         </tbody>
