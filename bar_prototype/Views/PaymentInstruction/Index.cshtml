@@ -27,7 +27,7 @@
                 <td>@item.PaymentMethod</td>
                 <td>@item.Amount</td>
                 <td>@item.Status</td>
-                @if(item.Status != bar_prototype.Model.StatusType.Submitted)
+                @if(item.Status != bar_prototype.Model.StatusType.Pending)
                 {
                     <td><a href='@Url.Action("Submit", new { id = item.Id })' >Submit</a></td>
                 }

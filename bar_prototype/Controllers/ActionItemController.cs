@@ -29,12 +29,12 @@ namespace bar_prototype.Controllers
             return View(actionItemRepository.GetAll());
         }
 
-        public IActionResult Create()
+        public IActionResult CreateProcessed()
         {
-            var actionItem = new Draft
+            var actionItem = new Processed
             {
                 Id = idGenerator.GetId(),
-                Status = StatusType.Pending
+                Status = StatusType.InProgress
             };
            
             actionItemRepository.Add(actionItem);
@@ -76,7 +76,7 @@ namespace bar_prototype.Controllers
         public IActionResult AddPayment(int id, int paymentInstructionId)
         {
 
-            var paymentInstruction = paymentInstructionRepository.Get(paymentInstructionId, StatusType.Submitted);
+            var paymentInstruction = paymentInstructionRepository.Get(paymentInstructionId, StatusType.Pending);
 
             if (paymentInstruction == null)
             {
@@ -89,6 +89,18 @@ namespace bar_prototype.Controllers
             actionItemRepository.Remove(actionItem);
             actionItem.PaymentGroup.PaymentInstructions.Add(paymentInstruction);
             actionItemRepository.Add(actionItem);
+
+            return RedirectToAction("Details", new { id = id });
+        }
+
+        public IActionResult LinkSuspenseDeficiency(int id, int suspenseDeficiencyId)
+        {
+
+            var actionItem = actionItemRepository.Get(id);
+
+            var suspenseDeficiency = actionItemRepository.Get(suspenseDeficiencyId);
+
+            actionItem.AssociatedActions.Add(suspenseDeficiency);
 
             return RedirectToAction("Details", new { id = id });
         }
@@ -144,7 +156,7 @@ namespace bar_prototype.Controllers
             {
                 Id = idGenerator.GetId(),
                 FailedPayment = paymentInstruction,
-                Status = StatusType.PendingApproval
+                Status = StatusType.InProgress
             };
             suspenseDeficiency.PaymentGroup.PaymentInstructions.Add(paymentInstruction);
             suspenseDeficiency.AssociatedActions.Add(item);
@@ -161,7 +173,7 @@ namespace bar_prototype.Controllers
             return RedirectToAction("SuspenseDeficiency" , item);
         }
 
-        public IActionResult CreateReplacementPayment(int id)
+        public IActionResult CreateReplacementPaymentWithSuspenseDef(int id)
         {
             var item = actionItemRepository.Get(id);
 
@@ -175,6 +187,19 @@ namespace bar_prototype.Controllers
             actionItemRepository.Add(replacementPayment);
 
             return RedirectToAction("Index");
+        }
+
+        public IActionResult CreateReplacementPayment()
+        {
+            var actionItem = new ReplacementPayment
+            {
+                Id = idGenerator.GetId(),
+                Status = StatusType.InProgress
+            };
+
+            actionItemRepository.Add(actionItem);
+
+            return View("ReplacementPayment", actionItem);
         }
 
        /* public IActionResult ViewReplacementPayment(int id)

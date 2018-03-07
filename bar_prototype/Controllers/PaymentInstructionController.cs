@@ -61,7 +61,7 @@ namespace bar_prototype.Controllers
 
             paymentInstruction.Id = idGenerator.GetId();
             paymentInstruction.Amount = viewModel.Amount;
-            paymentInstruction.Status = StatusType.Pending;
+            paymentInstruction.Status = StatusType.Draft;
             repository.Add(paymentInstruction);
 
             return View("Index", repository.GetAll());
@@ -70,7 +70,7 @@ namespace bar_prototype.Controllers
         public IActionResult Submit(int id)
         {
             var item = repository.Get(id);
-            item.Status = StatusType.Submitted;
+            item.Status = StatusType.Pending;
 
 
            

@@ -6,8 +6,10 @@ namespace bar_prototype.Model
 {
     public enum StatusType
     {
+        Draft,
         Pending,
-        Submitted,
+        InProgress,
+        Validated,
         PendingApproval,
         Approved,
         Rejected,

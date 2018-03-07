@@ -1,0 +1,18 @@
+﻿
+@model bar_prototype.Model.ActionItem
+
+<p class="tabHeader">
+    Link Suspense Deficiency
+</p>
+
+@using (Html.BeginForm("LinkSuspenseDeficiency", "ActionItem"))
+{
+    <p>
+        @Html.HiddenFor(x => x.Id, "actionItemId")
+       
+        <input type="text" name="suspenseDeficiencyId" />
+        <input type="submit" value="Link" />
+       
+    </p>
+}
+

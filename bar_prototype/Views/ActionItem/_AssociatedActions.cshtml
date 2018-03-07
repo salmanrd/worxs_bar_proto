@@ -1,12 +1,17 @@
 ﻿
-
+@using System.Linq;
 @model bar_prototype.Model.ActionItem
 
+@{
+ var associatedAction = Model.AssociatedActions.FirstOrDefault();
+}
+
 <p class="tabHeader">
-    Associated Actions
+    Associated Suspense Deficiency
 </p>
 
-<div>
+
+<div style="display:none;">
 <table>
         <thead>
         <tr>
@@ -18,7 +23,9 @@
          </tr>
         </thead>
         <tbody>
-        @foreach (var item in Model.Fees) {
+        @if (associatedAction != null)
+        {
+          foreach (var item in associatedAction.Fees) {
             <tr>
                 <td>@item.CaseReference</td>
                 <td>@item.Code</td>
@@ -26,31 +33,36 @@
                 <td>@item.Description</td>
                 <td>@item.CalculatedAmount</td>
             </tr>
-        }
+            }
+         }
         </tbody>
 </table>
 </div>
-
-<div>
-<table>
-        <thead>
-        <tr>
-            <th>Id</th>
-            <th>Payment Method</th>
-            <th>Amount</th>
-
-         </tr>
-        </thead>
-        <tbody>
-        @foreach (var item in Model.PaymentGroup.PaymentInstructions) {
+<p>
+    <div>
+    <table>
+            <thead>
             <tr>
-                
-                <td>@item.Id</td>
-                <td>@item.PaymentMethod</td>
-                <td>@item.Amount</td>
-               
-            </tr>
-        }
-        </tbody>
-</table>
-</div>
+                <th>Id</th>
+                <th>Payment Method</th>
+                <th>Amount</th>
+                <th>Status</th>
+             </tr>
+            </thead>
+            <tbody>
+            @if (associatedAction != null)
+            {
+                foreach (var item in associatedAction.PaymentGroup.PaymentInstructions) {
+                    <tr>
+                        
+                        <td>@item.Id</td>
+                        <td>@item.PaymentMethod</td>
+                        <td>@item.Amount</td>
+                       <td>@associatedAction.Status</td>
+                    </tr>
+                }
+            }
+            </tbody>
+    </table>
+    </div>
+</p>

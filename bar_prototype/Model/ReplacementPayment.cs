@@ -11,7 +11,9 @@ namespace bar_prototype.Model
         {
             var suspenseDeficiency = AssociatedActions.Find(x => x.ActionType == "SuspenseDeficiency");
 
-            var failedPaymentAmount = (suspenseDeficiency as SuspenseDeficiency).FailedPayment.Amount;
+            var failedPaymentAmount = 0d;
+            if (suspenseDeficiency != null)
+             failedPaymentAmount = (suspenseDeficiency as SuspenseDeficiency).FailedPayment.Amount;
 
             var totalPayment = PaymentGroup.CalculateTotalPayment();
 
