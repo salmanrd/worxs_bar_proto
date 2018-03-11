@@ -4,12 +4,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using bar_prototype.Model;
 using bar_prototype.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace bar_prototype.Controllers
 {
+   
+    [Authorize]
     public class PaymentInstructionController : Controller
     {
         PaymentInstructionRepository repository;
